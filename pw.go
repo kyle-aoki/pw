@@ -12,8 +12,7 @@ import (
 const lower_case_letters = "abcdefghijklmnopqrstuvwxyz"
 const upper_case_letters = "ABCDEFGHIJKLMNOPQRSTUVWXYZ"
 const numbers = "1234567890"
-const symbols = "*&@"
-const char_pool = lower_case_letters + upper_case_letters + numbers + symbols
+const char_pool = lower_case_letters + upper_case_letters + numbers
 
 func main() {
 	rand.Seed(time.Now().UnixNano())
@@ -23,7 +22,7 @@ func main() {
 	for i := 0; i < 3000; i++ {
 		pw := generatePassword(pwLength)
 		if containsAll(pw) {
-			fmt.Print(pw)
+			fmt.Println(pw)
 			os.Exit(0)
 		}
 	}
@@ -31,8 +30,7 @@ func main() {
 }
 
 func containsAll(pw string) bool {
-	return (contains(symbols, pw) &&
-		contains(numbers, pw) &&
+	return (contains(numbers, pw) &&
 		contains(upper_case_letters, pw) &&
 		contains(lower_case_letters, pw))
 }
@@ -66,7 +64,7 @@ func generatePassword(pwLength int) string {
 
 func obtainLengthFromArgs() int {
 	args := os.Args[1:]
-	
+
 	if len(args) == 0 {
 		return 20
 	} else {
