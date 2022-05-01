@@ -8,5 +8,5 @@ pw 40
 pw 40 | pbcopy
 
 #  make a file & copy to clipboard
-pw 40 > tmppw2.txt | pbcopy
+pw 40 > pw.txt | pbcopy
 ```
