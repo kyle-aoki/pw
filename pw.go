@@ -28,7 +28,7 @@ func main() {
 		pw = generatePassword(pwLength)
 	}
 	
-	fmt.Println(pw)
+	fmt.Print(pw)
 }
 
 func generatePassword(pwLength int) Password {
