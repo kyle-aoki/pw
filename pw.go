@@ -18,22 +18,28 @@ func main() {
 			fmt.Println(r)
 		}
 	}()
-	var length = 32
+	length := 32
 	if len(os.Args) > 1 {
 		i64, err := strconv.ParseInt(os.Args[1], 10, 64)
-		if err != nil {
-			panic(err)
-		}
+		check(err)
 		length = int(i64)
 	}
-	var s []byte
+	var str []byte
 	for i := 0; i < length; i++ {
-		s = append(s, pool[randInt(len(pool))])
+		ch := pool[randInt(len(pool))]
+		str = append(str, ch)
 	}
-	fmt.Print(string(s))
+	fmt.Print(string(str))
 }
 
 func randInt(mx int) int64 {
-	n, _ := rand.Int(rand.Reader, big.NewInt(int64(mx)))
+	n, err := rand.Int(rand.Reader, big.NewInt(int64(mx)))
+	check(err)
 	return n.Int64()
+}
+
+func check(err error) {
+	if err != nil {
+		panic(err)
+	}
 }
