@@ -8,9 +8,7 @@ import (
 	"strconv"
 )
 
-const letters = "ABCDEFGHIJKLMNOPQRSTUVWXYZ"
-const numbers = "0123456789"
-const pool = letters + numbers
+const pool = "ABCDEFGHIJKLMNOPQRSTUVWXYZ" + "0123456789"
 
 func main() {
 	defer func() {
@@ -18,7 +16,7 @@ func main() {
 			fmt.Println(r)
 		}
 	}()
-	length := 32
+	length := 30
 	if len(os.Args) > 1 {
 		i64, err := strconv.ParseInt(os.Args[1], 10, 64)
 		check(err)
@@ -29,7 +27,12 @@ func main() {
 		ch := pool[randInt(len(pool))]
 		str = append(str, ch)
 	}
-	fmt.Print(string(str))
+	pw := formatPassword(string(str))
+	fmt.Print(pw)
+}
+
+func formatPassword(str string) string {
+	return fmt.Sprintf("%sx!", str)
 }
 
 func randInt(mx int) int64 {
