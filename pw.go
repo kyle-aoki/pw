@@ -2,36 +2,34 @@ package main
 
 import (
 	"crypto/rand"
+	"flag"
 	"fmt"
 	"math/big"
-	"os"
-	"strconv"
+)
+
+var (
+	length = flag.Int("l", 32, "length of password")
+	net    = flag.Bool("net", false, "print an internet friendly password")
 )
 
 const pool = "ABCDEFGHIJKLMNOPQRSTUVWXYZ" + "0123456789"
 
 func main() {
-	defer func() {
-		if r := recover(); r != nil {
-			fmt.Println(r)
-		}
-	}()
-	length := 30
-	if len(os.Args) > 1 {
-		i64, err := strconv.ParseInt(os.Args[1], 10, 64)
-		check(err)
-		length = int(i64)
-	}
+	flag.Parse()
 	var str []byte
-	for i := 0; i < length; i++ {
+	for i := 0; i < *length; i++ {
 		ch := pool[randInt(len(pool))]
 		str = append(str, ch)
 	}
-	pw := formatPassword(string(str))
-	fmt.Print(pw)
+	if *net {
+		pw := formatNetPassword(string(str))
+		fmt.Print(pw)
+	} else {
+		fmt.Print(string(str))
+	}
 }
 
-func formatPassword(str string) string {
+func formatNetPassword(str string) string {
 	return fmt.Sprintf("%sx!", str)
 }
 
