@@ -9,7 +9,6 @@ import (
 
 var (
 	length = flag.Int("l", 32, "length of password")
-	net    = flag.Bool("net", false, "print an internet friendly password")
 )
 
 const pool = "ABCDEFGHIJKLMNOPQRSTUVWXYZ" + "0123456789"
@@ -21,12 +20,8 @@ func main() {
 		ch := pool[randInt(len(pool))]
 		str = append(str, ch)
 	}
-	if *net {
-		pw := formatNetPassword(string(str))
-		fmt.Print(pw)
-	} else {
-		fmt.Print(string(str))
-	}
+	pw := formatNetPassword(string(str))
+	fmt.Print(pw)
 }
 
 func formatNetPassword(str string) string {
