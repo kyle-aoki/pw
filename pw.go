@@ -8,7 +8,7 @@ import (
 )
 
 var (
-	length = flag.Int("l", 32, "length of password")
+	length = flag.Int("l", 30, "length of password")
 )
 
 const pool = "ABCDEFGHIJKLMNOPQRSTUVWXYZ" + "0123456789"
